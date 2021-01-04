@@ -4,7 +4,7 @@
 * Database Ideas
 Master DB + Read Replicas + Analytics DB
 
-`
+```
 database.yml
 
 development:
@@ -34,4 +34,4 @@ class Model < ApplicationRecord
 end
 
 
-`
+```
