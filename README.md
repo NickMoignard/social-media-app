@@ -1,24 +1,37 @@
-# README
+ Rich Text Editor
+ Trix
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Database Ideas
+Master DB + Read Replicas + Analytics DB
 
-Things you may want to cover:
+`
+database.yml
 
-* Ruby version
+development:
+  primary:
+    database: my_primary_db
+    user: root
+  primary_replica:
+    database: my_primary_db
+    user: ro_user
+    replica: true
+  secondary:
+    database: my_secondary_db
+    user: root
+  secondary_replica:
+    database: my_secondary_db
+    user: ro_user
+    replica: true
 
-* System dependencies
+model.rb
 
-* Configuration
+class Model < ApplicationRecord
+    self.abstract_class = true
+    connects_to database: {
+        writing: :animals_primary,
+        reading: :animals_replica
+    }
+end
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`
